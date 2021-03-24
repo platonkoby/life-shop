@@ -1,0 +1,8 @@
+What information does the item need:
+
+    1) title
+    2) cost
+    3) type (small item, medium, large, unique)
+    4) fine
+    5) id
+    6) maximum daily purchases
