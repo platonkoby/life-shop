@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import GlobalContext from '../context/globalContext';
+import GlobalContext from '../utils/globalContext';
 import Nav from './Nav';
 import Shop from './Shop';
 import Rewards from './Rewards';
 import Balance from './Balance';
 import Fines from './Fines';
 import Basket from './Basket';
-import { AnyItem, BasketItem } from '../data/AllItems';
+import { AnyItem } from '../data/AllItems';
+import basketReducer from '../utils/basketReducer';
 
-
-// try useReducer??
 
 function App() {
-  const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
+  const [basketItems, dispatch] = useReducer(basketReducer, [])
+  const [currentItem, setCurrentItem] = useState<AnyItem | null>(null)
 
   const updateBasketItemsPlus = (item: AnyItem) => {
     const chosenItem = basketItems.find((chosen) => chosen.id === item.id);
       if (!chosenItem) {
-        setBasketItems((basketItems) => [...basketItems, new BasketItem({...item, amount: 1})]);
+        dispatch({type: 'add', item})
       } else {
-        setBasketItems((basketItems) => basketItems.map((basketItem) => {
-          if (basketItem.id === chosenItem.id) {
-            basketItem.increaseAmount();
-          }
-          return basketItem;
-        }))
+        setCurrentItem(item);
+        dispatch({type: 'increase', item})
       }
   }
   const updateBasketItemsMinus = (item: AnyItem) => {
     const chosenItem = basketItems.find((chosen) => chosen.id === item.id);
     if (chosenItem) {
       if (chosenItem.amount > 0) {
-          setBasketItems((basketItems) => basketItems.map((basketItem) => {
-          if (basketItem.id === chosenItem.id) {
-            basketItem.decreaseAmount();
-          }
-          return basketItem;
-        }))
+          dispatch({type: 'decrease', item});
       } else {
-        setBasketItems((basketItems) => basketItems.filter((basketItem) => (
-          basketItem.id !== chosenItem.id
-        )))
+        dispatch({type: 'remove', item});
       }
     }
   }
 
+
   useEffect(() => {
-    console.log(basketItems)
-  }, [basketItems])
+    if (currentItem) {
+      
+    }
+  }, [currentItem])
 
   return (
     <div className="skeleton">
@@ -78,4 +70,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

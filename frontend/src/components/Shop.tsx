@@ -14,6 +14,7 @@ function Shop() {
                     <div className="shop-item">
                         <h3 className="heading-title">title</h3>
                         <h3 className="heading-price">price</h3>
+                        <h3 className="heading-maximum">daily maximum</h3>
                         <h3 className="heading-amount">amount in basket</h3>
                     </div>
                     {startingItems.map((item, index) => (

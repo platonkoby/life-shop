@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {FaShoppingBasket} from 'react-icons/fa'
 import { useContext } from 'react';
-import GlobalContext from '../context/globalContext';
+import GlobalContext from '../utils/globalContext';
 
 function BasketNavEl() {
     const {basketItems} = useContext(GlobalContext);

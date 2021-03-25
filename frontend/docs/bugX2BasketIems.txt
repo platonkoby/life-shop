@@ -1,0 +1,30 @@
+when adding a new basket item, the amount given is 1 as needed
+
+however when the user is trying to increase or decrese the amount of existing item
+in the basket, it ±2 instead of ±1
+
+how the basket item's amount is morphed:
+
+    1) The +/- buttons in the ux is pressed
+
+    2) The click runs function updateBasketItemsMinus/updateBasketItemsPlus and passes in
+    item which was pressed in as a parameter
+
+    3) basketItems array is checked to have the item which was clicked
+
+    With updateBasketItemsPlus:
+
+    4) if basketItems array finds the clicked item, it runs dispatch type increase and passes in
+    the clicked item
+
+    5) is basketReducer function, the basketItem array is mapped to increase the amount for the chosen item by 1,
+    and returned
+
+
+    checks:
+
+    - check the amount on every single stage
+        1) when ShopItem.txs receives, already increased by 2
+        2) 
+    - increase the amount of starting items in the shop, to see if it affects the result
+
