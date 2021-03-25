@@ -13,14 +13,12 @@ import basketReducer from '../utils/basketReducer';
 
 function App() {
   const [basketItems, dispatch] = useReducer(basketReducer, [])
-  const [currentItem, setCurrentItem] = useState<AnyItem | null>(null)
 
   const updateBasketItemsPlus = (item: AnyItem) => {
     const chosenItem = basketItems.find((chosen) => chosen.id === item.id);
       if (!chosenItem) {
         dispatch({type: 'add', item})
       } else {
-        setCurrentItem(item);
         dispatch({type: 'increase', item})
       }
   }
@@ -35,12 +33,6 @@ function App() {
     }
   }
 
-
-  useEffect(() => {
-    if (currentItem) {
-      
-    }
-  }, [currentItem])
 
   return (
     <div className="skeleton">

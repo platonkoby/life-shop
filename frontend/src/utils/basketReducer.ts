@@ -10,11 +10,7 @@ function basketReducer (state: BasketItem[], action: ListActions): BasketItem[] 
         case 'increase':
             return state.map((chosen) => {
                 if (chosen.id === item.id) {
-                    /* there is a bug to which i did not find the best solution,
-                    when the increment or decrement happens, the value used, is
-                    doubled, therefore when using 0.5, the increment will be by
-                    1 */
-                    chosen.amount += 0.5;
+                    chosen.increaseAmount();
                 }
                 return chosen;
             });
@@ -25,7 +21,7 @@ function basketReducer (state: BasketItem[], action: ListActions): BasketItem[] 
         case 'decrease':
             return state.map((chosen) => {
                 if (chosen.id === item.id) {
-                    chosen.amount -= 0.5;
+                    chosen.decreaseAmount();
                 }
                 return chosen;
             })

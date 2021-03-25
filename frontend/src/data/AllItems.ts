@@ -25,17 +25,26 @@ export class AnyItem {
 
 export class BasketItem extends AnyItem {
     amount: number;
+    limit: boolean;
     constructor(props: BasketItemTs) {
         super(props)
         this.amount = props.amount;
+        this.limit = false;
+    }
+
+    checkLimit() {
+        if (this.amount === this.dailyMax) {
+            this.limit = true;
+        } 
     }
 
     increaseAmount() {
-        console.log(this)
         this.amount++;
+        this.checkLimit();
     }
     decreaseAmount() {
         this.amount--;
+        this.limit = false;
     }
 }
 

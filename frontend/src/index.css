@@ -7,6 +7,7 @@
     --text-dark-sec: rgb(58, 58, 59);
     --text-light-tert: rgb(160, 198, 209);
     --text-lightest-nav: white;
+    --warning: red;
 }
 
 
@@ -248,4 +249,12 @@ h1, h2, h3, h4, h5 {
 
 .item-amount {
     justify-self: center;
+}
+
+.warning {
+    border-color: var(--warning);
+}
+
+.warning .item-maximum, .warning .item-amount {
+    color: var(--warning);
 }
