@@ -1,19 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ImPlus, ImMinus } from 'react-icons/im';
 import GlobalContext from '../utils/globalContext';
-import { AnyItem } from '../data/AllItems';
+import { AnyItem, BasketItem } from '../data/AllItems';
 
 function ShopItem({children}:Props) {
     const [warning, setWarning] = useState(false);
     const {basketItems, updateBasketItemsPlus, updateBasketItemsMinus} = useContext(GlobalContext);
     const {title, cost, id, dailyMax} = children;
-    let amount: number | undefined;
+    const [currentItem, setCurrentItem] = useState<BasketItem | undefined>()
     
     useEffect(() => {
         if (basketItems) {
-            const currentItem = basketItems.find((item) => item.id === id);
+            setCurrentItem(basketItems.find((item) => item.id === id));
             if (currentItem) {
-                amount = currentItem.amount;
                 if (currentItem.limit) {
                     setWarning(true);
                 } else {
@@ -40,7 +39,7 @@ function ShopItem({children}:Props) {
             </div>
             <div className="item-cost"><span>{cost}p</span></div>
             <div className="item-maximum">{dailyMax === Infinity ? 'N/A' : dailyMax}</div>
-            <div className="item-amount"><span>{amount || 0}</span></div>
+            <div className="item-amount"><span>{currentItem?.amount || 0}</span></div>
         </div>
     )
 }
